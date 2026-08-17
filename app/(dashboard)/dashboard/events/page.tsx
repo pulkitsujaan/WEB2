@@ -10,8 +10,9 @@ import { CalendarDays, CalendarPlus, MapPin, Tag, Trash2, ExternalLink, Globe, E
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import DeleteEventButton from "@/components/dashboard/DeleteEventButton";
+import PublishToggleButton from "@/components/dashboard/PublishToggleButton";
 
-export const metadata: Metadata = { title: "Events" };
+export const metadata: Metadata = { title: "Manage Events" };
 
 const CATEGORY_COLORS: Record<string, string> = {
   technical:  "bg-indigo-100 text-indigo-700",
@@ -49,7 +50,7 @@ export default async function EventsPage() {
             <CalendarDays className="w-5 h-5 text-emerald-600" />
           </div>
           <div>
-            <h1 className="font-display text-2xl font-bold text-slate-900">Events</h1>
+            <h1 className="font-display text-2xl font-bold text-slate-900">Manage Events</h1>
             <p className="text-slate-500 text-sm">
               {events.length} event{events.length !== 1 ? "s" : ""} total
             </p>
@@ -181,6 +182,7 @@ function EventRow({
             <ExternalLink className="w-4 h-4" />
           </a>
         )}
+        <PublishToggleButton id={String(event._id)} isPublished={Boolean(event.isPublished)} />
         <DeleteEventButton id={String(event._id)} />
       </div>
     </div>

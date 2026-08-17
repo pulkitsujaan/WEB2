@@ -59,7 +59,7 @@ const NAV_ITEMS: NavItem[] = [
     description: "Club statistics",
   },
   {
-    label: "Events",
+    label: "Manage Events",
     href: "/dashboard/events",
     icon: CalendarDays,
     roles: ["president", "core"],
