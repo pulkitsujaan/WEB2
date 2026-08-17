@@ -4,35 +4,8 @@ import { useMemo, useState } from "react";
 import { ChevronLeft, ChevronRight, CalendarDays, MapPin } from "lucide-react";
 import Image from "next/image";
 
-const EVENTS = [
-  {
-    id: 1,
-    title: "Awaz-e-Janata",
-    description: "An interactive democratic simulation for first-year students.",
-    image: "https://media.istockphoto.com/id/495725398/photo/ballot-box.jpg?s=612x612&w=0&k=20&c=8FQC2VyhMfMBjjFV2cukQiO_eor4eXSjh84AUalWTLE=",
-    date: "18 Feb 2026",
-    venue: "Common Room, Iravati Hostel",
-  },
-  {
-    id: 2,
-    title: "Maha Shivratri Pooja",
-    description: "A cultural and religious observance celebrating Maha Shivratri, featuring traditional rituals, prayers, and community gatherings among students.",
-    image: "https://cdn.typeflo.io/_next/image?url=https%3A%2F%2Fauth.typeflo.io%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fposts%2Fpublic%2F6eae6931-f95c-4bcd-b740-e9c3acce8146%2F52151068-c27b-41a1-a754-24eb44f1bff7%2F6wlne4a.webp%3F1770379440102&w=3840&q=75",
-    date: "15 Feb 2026",
-    venue: "Admin Block",
-  },
-  {
-    id: 3,
-    title: "Cultural Fest - MRIDANG",
-    description: "Annual cultural festival featuring music, dance, and art competitions across departments. A night to remember!",
-    image: "https://mridang.iiitu.ac.in/assets/1-Dz4-jQo8.webp",
-    date: "20 Nov 2025",
-    venue: "Open Air Theatre",
-  },
-];
-
 export function EventsCarousel({ events }: { events?: Array<{ id: any; title: string; description: string; image?: string | null; date: string; venue: string; }> }) {
-  const items = events && events.length > 0 ? events : EVENTS;
+  const items = events ?? [];
   const [activeIndex, setActiveIndex] = useState(0);
   const totalCards = items.length;
 
@@ -68,7 +41,7 @@ export function EventsCarousel({ events }: { events?: Array<{ id: any; title: st
           fests, EPMOC organises diverse events throughout the year.
         </p>
 
-        <div className="mt-8 flex items-center gap-3 hidden lg:flex">
+        <div className="mt-8 hidden items-center gap-3 lg:flex">
           <button
             type="button"
             onClick={scrollLeft}
@@ -101,13 +74,17 @@ export function EventsCarousel({ events }: { events?: Array<{ id: any; title: st
           >
             {/* Image Section */}
             <div className="relative h-48 w-full bg-slate-100 flex-shrink-0">
-              <Image
-                src={card.image}
-                alt={card.title}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 320px"
-              />
+              {card.image ? (
+                <Image
+                  src={card.image}
+                  alt={card.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 320px"
+                />
+              ) : (
+                <div className="h-full w-full flex items-center justify-center text-slate-400">No image</div>
+              )}
             </div>
 
             {/* Text Section */}
